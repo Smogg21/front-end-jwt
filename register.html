@@ -98,47 +98,37 @@
     <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- App scripts -->
     <script src="scripts/luna.js"></script>
 
-    <!-- Librería Axios (opcional si prefieres usar Axios en lugar de jQuery) -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
         $(document).ready(function () {
             $('#registerForm').on('submit', function (e) {
-                e.preventDefault(); // Prevenir el envío predeterminado del formulario
+                e.preventDefault(); 
 
-                // Obtener valores de los campos
                 const name = $('#username').val().trim();
                 const email = $('#email').val().trim();
                 const password = $('#password').val();
                 const repeatPassword = $('#repeatpassword').val();
 
-                // Validar que las contraseñas coincidan
                 if (password !== repeatPassword) {
                     mostrarAlerta('Las contraseñas no coinciden.', 'danger');
                     return;
                 }
 
-                // Construir el objeto de usuario
                 const user = {
                     name: name,
                     email: email,
                     password: password
                 };
 
-                // Enviar solicitud POST a la API de registro
                 axios.post('http://localhost:5000/api/auth/register', user)
                     .then(function (response) {
-                        // Manejar la respuesta exitosa
                         const token = response.data.token;
                         mostrarAlerta('Registro exitoso. Token recibido.', 'success');
                         console.log(token);
-                        // Almacenar el token en localStorage (opcional)
                         localStorage.setItem('token', token);
-                        // Redirigir al usuario o realizar otra acción
-                        // window.location.href = 'dashboard.html';
                     })
                     .catch(function (error) {
                         // Manejar errores
@@ -149,8 +139,6 @@
                         }
                     });
             });
-
-            // Función para mostrar alertas
             function mostrarAlerta(mensaje, tipo) {
                 const alertDiv = $('#alert');
                 alertDiv.removeClass('alert-success alert-danger alert-warning alert-info');

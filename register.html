@@ -134,6 +134,7 @@
                         // Manejar la respuesta exitosa
                         const token = response.data.token;
                         mostrarAlerta('Registro exitoso. Token recibido.', 'success');
+                        console.log(token);
                         // Almacenar el token en localStorage (opcional)
                         localStorage.setItem('token', token);
                         // Redirigir al usuario o realizar otra acción
